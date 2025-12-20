@@ -7,7 +7,7 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
+        stage('Clone Repo') {
             steps {
                 git 'https://github.com/kgsharadhaskill-edu/testkgpath.git'
             }
