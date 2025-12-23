@@ -1,11 +1,24 @@
 pipeline {
     agent any
-    stages {
-           stage('GitHub'){
-               steps {
-                      git branch: 'main', credentialsId: 'jenkins-configure-git', url: 'https://github.com/kgsharadhaskill-edu/testkgpath.git'
 
-                  }
-              } 
-          )
-     }
+    tools {
+        nodejs 'NodeJS'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/kgsharadhaskill-edu/testkgpath.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'node -v'
+                sh 'npm install'
+            }
+        }
+    }
+}
+
