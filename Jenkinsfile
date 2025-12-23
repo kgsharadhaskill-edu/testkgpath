@@ -10,12 +10,11 @@ pipeline {
             }
         }
         stage('Unit Test') {
-    steps {
-        sh 'docker run --rm -v $PWD:/app -w /app node:20-bullseye npm install'
-        sh 'docker run --rm -v $PWD:/app -w /app node:20-bullseye npm test'
-           }
+            steps {
+                sh 'npm install'
+                sh 'npm test'
+            }
         }
-
     }
 }
 
