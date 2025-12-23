@@ -1,7 +1,6 @@
 pipeline {
-    agent any
-    tools {
-        nodejs 'NodeJS' // Must match the NodeJS installation name in Jenkins
+    agent {
+        docker { image 'node:20-bullseye' } // official Node image
     }
     stages {
         stage('GitHub') {
