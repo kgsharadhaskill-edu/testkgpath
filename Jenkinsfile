@@ -1,6 +1,7 @@
 pipeline {
-    agent {
-        docker { image 'node:20-bullseye' } // official Node image
+    agent any
+    tools {
+        nodejs 'NodeJS' // must match name in Jenkins Global Tool Configuration
     }
     stages {
         stage('GitHub') {
@@ -9,11 +10,12 @@ pipeline {
             }
         }
         stage('Unit Test') {
-            steps {
-                sh 'npm install'
-                sh 'npm test'
-            }
+    steps {
+        sh 'docker run --rm -v $PWD:/app -w /app node:20-bullseye npm install'
+        sh 'docker run --rm -v $PWD:/app -w /app node:20-bullseye npm test'
+           }
         }
+
     }
 }
 
