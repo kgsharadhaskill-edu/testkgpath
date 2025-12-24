@@ -1,19 +1,34 @@
 pipeline {
     agent any
+
     tools {
-           nodejs 'NodeJS'
-     }
-    stages{
-        stage('GitHub') {
+        nodejs 'node16'
+    }
+
+    stages {
+
+        stage('Checkout') {
             steps {
-            git branch: 'main', credentialsId: 'KGpath', url: 'https://github.com/kgsharadhaskill-edu/testkgpath.git'    
+                git branch: 'main',
+                    credentialsId: 'KGpath',
+                    url: 'https://github.com/kgsharadhaskill-edu/testkgpath.git'
             }
         }
-           stage('Unit Test'){
-			steps {
-				sh 'npm test'
-				sh 'npm install'		
-			}
-		}
+
+        stage('Install Dependencies') {
+            steps {
+                sh '''
+                  node -v
+                  npm -v
+                  npm install
+                '''
+            }
+        }
+
+        stage('Unit Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
     }
 }
