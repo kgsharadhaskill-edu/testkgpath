@@ -1,24 +1,10 @@
-pipeline {
+peline {
     agent any
-
-    tools {
-        nodejs 'NodeJS'
-    }
-
-    stages {
-        stage('Checkout') {
+    stages{
+        stage('GitHub') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/kgsharadhaskill-edu/testkgpath.git'
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                sh 'node -v'
-                sh 'npm install'
+            git branch: 'main', credentialsId: 'KGpath', url: 'https://github.com/kgsharadhaskill-edu/testkgpath.git'    
             }
         }
     }
 }
-
